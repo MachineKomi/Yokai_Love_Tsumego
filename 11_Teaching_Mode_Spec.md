@@ -7,7 +7,7 @@ It bridges the gap between the raw mathematical output of KataGo (WASM) and the 
 # 11_Teaching_Mode_Spec.md
 
 # Teaching Mode Specification: The "God's Eye"
-**Project:** Tsumego Tower
+**Project:** Yokai Love Tsumego
 **Version:** 1.0.0
 **Context:** This document defines the functional requirements, technical implementation, and visualization standards for the client-side AI analysis features. It informs the development of the React state machine, the KataGo Web Worker, and the PixiJS VFX layer.
 

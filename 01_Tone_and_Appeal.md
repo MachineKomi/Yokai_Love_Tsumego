@@ -4,8 +4,8 @@ Here is the **Tone and Appeal Bible**. This document acts as the "Vibe Check" fo
 
 # 01_Tone_and_Appeal.md
 
-# Tone & Appeal Bible: The "Tsumego Tower" Vibe
-**Project:** Tsumego Tower
+# Tone & Appeal Bible: The "Yokai Love Tsumego" Vibe
+**Project:** Yokai Love Tsumego
 **Version:** 1.0.0
 **Context:** This document guides Art Direction, Sound Design, UI/UX, and Narrative Writing.
 
@@ -13,7 +13,7 @@ Here is the **Tone and Appeal Bible**. This document acts as the "Vibe Check" fo
 
 ## 1. The Core Emotional Pillar: "Intellectual Heroism"
 
-The central fantasy of *Tsumego Tower* is that **intelligence is attractive.**
+The central fantasy of *Yokai Love Tsumego* is that **intelligence is attractive.**
 
 * **The Feeling:** The player should feel like a genius tactician. When they solve a hard puzzle, the game treats it like slaying a dragon. The screen shakes, the audio booms, and the Waifu cheers.
 * **The Feedback Loop:** Hard work (Thinking) $\rightarrow$ Instant Validation (Visuals/Sound) $\rightarrow$ Social Reward (Waifu Affection).

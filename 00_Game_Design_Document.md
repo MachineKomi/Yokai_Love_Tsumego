@@ -6,25 +6,12 @@ It is designed to be **modular** (so we can cut features if scope creeps) and **
 
 # 00_Game_Design_Document.md
 
-# Tsumego Tower: The Divine Ascent
+# Yokai Love Tsumego: The Divine Ascent
 Here is the **Game Design Document (GDD)**. This serves as the "Constitution" for the project. It translates the high-level pitch into actionable mechanics, loops, and systems that our AI Agents can implement.
 
 It is designed to be **modular** (so we can cut features if scope creeps) and **technically grounded** in the Architecture we agreed upon (Supabase + React + KataGo).
 
-***
-
-# 00_Game_Design_Document.md
-
-# Tsumego Tower: The Divine Ascent
-**Project Code:** `tsumego-tower`
-**Version:** 1.0.0
-**Status:** In Development
-
----
-
-## 1. Executive Summary
-
-**Tsumego Tower** is a "Nostalgic 90s Anime" puzzle RPG. The Demon Lord has banned Go, and the Player must climb the tower to tame Yokai, Goddesses, and Devils to defeat the Demon Lord’s tyranny.
+**Yokai Love Tsumego** is a "Nostalgic 90s Anime" puzzle RPG. The Demon Lord has banned Go, and the Player must climb the tower to tame Yokai, Goddesses, and Devils to defeat the Demon Lord’s tyranny.
 
 **The Hook:** "The Demon Lord has banned Go. Climb the tower, tame the Yokai, and bring logic back to the world."
 **Target Audience:** Go players (25k to 9d), fans of logic puzzles, and fans of anime/VN aesthetics.

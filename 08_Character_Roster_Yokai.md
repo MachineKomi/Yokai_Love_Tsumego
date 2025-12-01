@@ -7,7 +7,7 @@ It focuses on the initial "Starting Trio" to keep the scope manageable for the v
 # 08_Character_Roster_Yokai.md
 
 # Character Roster: The Yokai Spirits
-**Project:** Tsumego Tower: A Yokai Dating Sim
+**Project:** Yokai Love Tsumego: A Yokai Dating Sim
 **Version:** 1.0.0
 **Context:** This document defines the personalities, visual designs, and dialogue voices for the recruitable Yokai companions. It is used by AI Art Agents for sprite generation and AI Writing Agents for dialogue and visual novel scene creation.
 

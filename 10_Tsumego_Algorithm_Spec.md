@@ -8,7 +8,7 @@ It defines the input data, the processing steps using KataGo, and the exact JSON
 
 # Tsumego Generation Algorithm Specification
 
-**Project:** Tsumego Tower
+**Project:** Yokai Love Tsumego
 **Version:** 1.0.0
 **Context:** This document defines the requirements for the offline Python pipeline that generates high-quality Go puzzles (Tsumego) from professional game records using KataGo.
 

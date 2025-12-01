@@ -7,7 +7,7 @@ This document is now a concrete, actionable guide that you can feed directly to 
 # 02_Art_Style_Bible.md
 
 # Art Style Bible: Visual Language & Generation Guide
-**Project:** Tsumego Tower: A Yokai Dating Sim
+**Project:** Yokai Love Tsumego: A Yokai Dating Sim
 **Version:** 3.0.0 (Final "Nostalgic OVA" Revision)
 **Context:** This document serves as the single source of truth for all visual assets. It defines the specific "prompt engineering" language for AI generators and the aesthetic rules for UI/UX implementation.
 
@@ -82,7 +82,7 @@ This document is now a concrete, actionable guide that you can feed directly to 
 # 02_Art_Style_Bible.md
 
 # Art Style Bible: Visual Language & Generation Guide
-**Project:** Tsumego Tower: A Yokai Dating Sim
+**Project:** Yokai Love Tsumego: A Yokai Dating Sim
 **Version:** 3.0.0 (Final "Nostalgic OVA" Revision)
 **Context:** This document serves as the single source of truth for all visual assets. It defines the specific "prompt engineering" language for AI generators and the aesthetic rules for UI/UX implementation.
 

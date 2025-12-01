@@ -8,7 +8,7 @@ It is structured to enforce the "Local-First" development strategy we agreed upo
 
 # Architecture Overview: The Hybrid Stack
 
-**Project:** Tsumego Tower: A Yokai Dating Sim
+**Project:** Yokai Love Tsumego: A Yokai Dating Sim
 **Version:** 1.0.0
 **Context:** This document defines the technical stack, component relationships, and data flow. It is the definitive guide for AI agents regarding library choices and architectural patterns.
 

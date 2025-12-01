@@ -8,7 +8,7 @@ It leans heavily on the **Supabase CLI** and **Docker** to ensure that your loca
 
 # DevOps Guidelines & Content Pipeline
 
-**Project:** Tsumego Tower
+**Project:** Yokai Love Tsumego
 **Version:** 1.0.0
 **Context:** This document outlines the practical workflows for local development, database management, content generation (puzzles/art), and deployment. It is designed for a solo developer workflow using a "Local-First" philosophy.
 

@@ -8,7 +8,7 @@ It relies heavily on **Row Level Security (RLS)**, which is Supabase's primary m
 
 # Database Schema & Security Policies
 
-**Project:** Tsumego Tower: A Yokai Dating Sim
+**Project:** Yokai Love Tsumego: A Yokai Dating Sim
 **Version:** 1.0.0
 **Context:** This document defines the PostgreSQL schema managed by Supabase. It serves as the reference for AI Agents writing backend migrations, seed scripts, and frontend data fetching logic.
 

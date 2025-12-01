@@ -6,7 +6,7 @@ Here is the **Technical Specification and Conventions** document. This is the de
 
 # Technical Specification & Coding Conventions
 
-**Project:** Tsumego Tower
+**Project:** Yokai Love Tsumego
 **Version:** 1.0.0
 **Context:** This document defines the mandatory technical standards, file structures, and coding patterns for the project. AI Agents must strictly adhere to these conventions to ensure code compatibility and maintainability.
 
@@ -145,7 +145,7 @@ Here is the **Technical Specification and Conventions** document. This is the de
 
 # Technical Specification & Coding Conventions
 
-**Project:** Tsumego Tower
+**Project:** Yokai Love Tsumego
 **Version:** 1.0.0
 **Context:** This document defines the mandatory technical standards, file structures, and coding patterns for the project. AI Agents must strictly adhere to these conventions to ensure code compatibility and maintainability.
 

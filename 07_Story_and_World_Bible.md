@@ -7,7 +7,7 @@ It is structured to give clear instructions to human writers or AI text generati
 # 07_Story_and_World_Bible.md
 
 # Story & World Bible: The Lore of the Spire
-**Project:** Tsumego Tower: A Yokai Dating Sim
+**Project:** Yokai Love Tsumego: A Yokai Dating Sim
 **Version:** 1.0.0
 **Context:** This document defines the world-building rules, narrative structure, character archetypes, and dialogue guidelines. It acts as the prompt context for any AI agents generating story text or character interactions.
 

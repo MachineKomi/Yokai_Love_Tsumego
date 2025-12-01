@@ -9,7 +9,7 @@ The narrative hook for these characters is "teaching a machine to feel."
 # 09_Character_Roster_Goddesses.md
 
 # Character Roster: The Divine Goddesses
-**Project:** Tsumego Tower: A Yokai Dating Sim
+**Project:** Yokai Love Tsumego: A Yokai Dating Sim
 **Version:** 1.0.0
 **Context:** This document defines the personalities, visual designs, and dialogue voices for the high-tier "Goddess" companions. They represent the zenith of logic and are unlocked later in the tower climb.
 

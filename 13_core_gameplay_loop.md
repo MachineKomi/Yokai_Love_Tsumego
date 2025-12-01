@@ -3,22 +3,6 @@
 ## The Philosophy: "Juicy puzzles and romance"
 
 The central challenge is that Tsumego (Go puzzles) are high-cognitive-load tasks. They can be dry and frustrating.
-
-To make this daily and addictive, we must wrap the "pain" of thinking in thick layers of instant gratification, sensory reward, and long-term emotional investment. Every correct move must feel like a critical hit in an RPG, and every return session must feel like visiting a friend.
-
----
-
-### 1. The Immediate Loop: "The Tactile Crunch"
-**Scope:** Seconds to 1 Minute (A single puzzle attempt).
-**Goal:** Make the act of thinking and placing a stone feel physically satisfying.
-
-**Phase 1: The Puzzle (Mental)**
-*   **Action:** The player solves a Go problem.
-*   **Feedback:** Juicy "THWACK" sound and particle effects.
-*   **Result:** Success charges "Mana" for the Auto-Battle phase.
-
-**Phase 2: The Auto-Battle (Visual)**
-*   **Action:** Watch your team of Yokai attack the enemy based on your puzzle performance.
 *   **Feedback:** Flashy skills, damage numbers, Waifu cheers.
 ### 2. The Short-Term Loop: "The Tower Floor Session"
 **Scope:** 5 to 15 Minutes (A single play session).

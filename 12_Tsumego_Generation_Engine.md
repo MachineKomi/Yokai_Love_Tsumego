@@ -8,7 +8,7 @@ It integrates the algorithmic steps previously discussed into a broader system v
 
 # Tsumego Generation Engine: The Content Factory
 
-**Project:** Tsumego Tower
+**Project:** Yokai Love Tsumego
 **Version:** 1.0.0
 **Context:** This document defines the offline Python infrastructure used to procedurally generate Go puzzles from historical and modern game records. It is meant for the backend/AI engineers building the data pipeline.
 

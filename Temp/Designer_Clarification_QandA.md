@@ -1,0 +1,125 @@
+Here are 30 targeted questions to clarify the specific mechanics, economy, and logic gaps in the design before we instruct the Gemini 3 Pro Agents to begin coding.
+
+Please answer these to the best of your current vision.
+
+### **Section A: The Tsumego (Puzzle) Engine**
+
+Q1.  **Puzzle Failure State:** When a player gets a puzzle wrong, does the streak break immediately, or do they get a "second chance" (perhaps costing a resource) to try again and keep the streak alive?
+A1. There are two types of streak, a "Mana Streak" which gives more significant and immediate bonuses, and which breaks when the player fails a puzzle, and the "Study Streak" which gives smaller, longer term but gradually compounding bonuses, and which does not break when the player fails a puzzle but which does break if more than 36 hours of actual time passes without the player at least attempting to solve a puzzle. The player can buy items that allow them to shield each streak type from breaking but they are limited: 2 shields can be used per day to protect their "Mana Streak" and 2 shields can be used per week to protect their "Study Streak".
+
+Q2.  **Hint Cost:** Should the "AI Hint/God's Eye" visualization be free for everyone, cost "Spirit Stones" (soft currency), or be exclusive to subscribers?
+A2. It should always be available either when completing the tsumego or when reviewing a failed or completed tsumego puzzle. However free players will naturally be limited to only a few tsumego puzzles per day so paying subscribers will get unlimited puzzles and users can also buy bundles of tsumego puzzles to solve. There is no currency called Spirit Stones. We will call them Mana Stones. Also "Logic is Magic" sounds cringe we aren't ever going to say that in this game. 
+
+Q3.  **Pre-baked vs. Live Fallback:** If a player plays a "wrong" move that isn't in our pre-baked "bad response" file, should the game immediately fail them, or should it spin up the WASM KataGo (client-side) to refute them in real-time?
+A3. Not sure yet - for now the player can fail, if we need to account for moves that we haven't calculated then we can think about live KataGo engine fallbacks but since tsumego puzzles are limited to relatively small board positions only showing the stones relevant to the puzzle it should be feasible to calculate all possible moves (not neccessarily all possible sequences, but at least all possible moves to a depth of at least 3 moves, that should be more than sufficient to then never need live KataGo engine calls.) We need to test this theory of mind during development to be sure. 
+
+Q4.  **Rank Volatility:** How quickly should a player's internal rank change? Should solving one 5-Dan puzzle immediately bump a 10-kyu player up, or is it a slower, weighted average (Elo-style)?
+A4. Elo-style, a strong player should be able to quickly rank up, a weaker player should quickly rank down but it should be gradual rather than immediate. The player should also be allowed to either manually set their rank or allow the game to try to calculate their rank based on their performance in a short test of 5 puzzles accross a range of difficulties which will then form a reccomendation for the player's starting rank. We can have leaderboards that show top players based on their go rank and their meta rpg rank and level etc. And then maybe seperate leaderboards so you can see how your RPG rank compares to other players in your go rank band or look at the go rank of players in your RPG rank band.
+
+Q5.  **Puzzle Exhaustion:** If a highly active player solves all 20 pre-generated puzzles for their rank before we generate more, should we serve them puzzles from the rank above (harder) or rank below (easier/review)?
+A5. We should also have a % chance to serve the player a puzzle that is +2 to -2 ranks from their current rank. But we shouldn't go beyond that, if they finish all of the avaialble puzzles thats our bad we need to add more new puzzles faster than players solve them (I think we can manage that) so the behaviour in this scenario would be that the player just ends up getting served puzzles that they've already seen which is not ideal but I think we can manage that, and we can just make sure that we generate more puzzles than at least MOST players will clear before we make more so we will have that going for us. Also we can make every 1 puzzle do the work of 4 puzzles by serving the position at the 4 degrees of rotation rotating it 90 degrees for each of the 4 corners of the board, and for positions that are on the side of the board rather than the corners or the middle then we can still rotate them 90 degrees 4 times anyway for the 4 sides of the board or the 4 orientations of the board. So that will play in our favour in terms of how many puzzles we have to generate before players start to see obvious repitition. 
+
+Q6.  **Review Mode:** Should players be able to bookmark/save specific puzzles to a "Study List" to replay later without earning rewards?
+A6. Yeah sure, we can do that. Not a top priority feature but why not. If we are doing the AI analysis compute ahead of time then I don't even see a need to limit this. But obviously if we are doing live KataGo analysis then we will need to limit this to prevent abuse and make sure that free players only get to review a certain number of puzzles per day in study mode. 
+
+### **Section B: The Auto-Battler & RPG Layer**
+
+Q7.  **Combat Interaction:** Does the Auto-Battle happen *simultaneously* with the puzzle solving (e.g., "Solve this puzzle in 30 seconds to deal damage!"), or is it a distinct phase (e.g., "You have banked 50 Mana from puzzles, now watch your team fight the floor boss")?
+A7. You have banked 50 Mana from puzzles, now watch your team fight the floor boss. Not simultaneous. That would be very distrating while trying to solve Tsumego puzzles. You can bank a certain amount of Mana per day and then use that to fight the Auto-Battle. But the players actual level and stats, and the level and stats of the companions currently set into their front and read combat line will determine the outcome of battles. Not just the amount of mana the player has banked. But the mana from solving currency also allows the player to level up their character and their companions. The player also earns Crystaline Aji from solving puzzles which they can spend in the shop to upgrade their character and their companions and purchase customizations options, companion outfits, gifts for companions etc. 
+
+on in game currencies and what they do: 
+
+#### **Currencies rewarded from solving puzzles:**
+
+- **Mana:** - use to level up attacks and abilities of your character and party members (party memebers are selected by the player from among their companions)
+- **Crystaline Aji:** - use to upgrade your character and party members level and base stats (which modify the effects of attacks and abilities)
+- **Gold:** - use to purchase customizations options, companion outfits, gifts for companions etc.
+- **Streaks:** - "Study Streaks" increase all currency rewards by a small compounding amount, "Mana Streaks" increase the amount of Mana & Crystaline Aji you earn from solving puzzles by a larger compounding amount, but doesn't reward Gold or stamina.
+- **Stamina:** - Used by the player to auto-battle, either chosing to hunt (battle randomly selected groups of enemies from the current floor's pool of enemies) or challenge boss, (battle the floor boss with a chance of failure which doesn't provide any rewards but does give the player an indication of how under or over leveled they are and gates progress to new floors which also therefore gates unlocking of new companions).
+- **Talisman:** - use to summon companions from the summoning pool which is added to as you progress through the game and reach higher floors in the tower. (very rare, only drops as a rare drop from hunting, always received from defeating a floor boss)
+
+#### **Currencies the player gets with their monthly subscription or which players can purchase packs of as micro transactions:**
+
+- **Talisman:** - use to summon companions from the summoning pool which is added to as you progress through the game and reach higher floors in the tower. Pretty cheap, lets paying players quickly get all of the avaialble companions and also max rank them through duplicates at least during early game with the relatively small initial pool of companions.
+- **Magical Collar:** - use to guarantee a new companion from the summoning pool (expensive but a good way to get a new companion), only can be used if there are companions available in the summoning pool that you haven't already got. 
+- **Premium Subscription:** - use to get 64 puzzles per day cap, 
+
+Q8.  **Death Penalty:** If the player's team is wiped out in the Auto-Battle, do they lose the "Mana/Energy" they accrued from solving puzzles that day?
+A8. No punishment for losing combat but they receive more rewards for actually successfully defeating enemies while hunting (aka farming), they also earn Mana and Crystaline Aji from hunting but they can only hunt/farm if they have stamina from solving tsumego puzzles. If they fail a hunt they get rewards for whatever they did defeat successfully during the hunt (if any enemies were defeated during the hunt) when fighting the boss they get no reward if they fail to defeat the boss and it still costs them stamina, creating an incentive for the player to only challenge the boss when they think they are well prepared and ready. 
+
+Q9.  **Combat Visuals:** For the Auto-Battle, do you envision:
+    * A) Chibi sprites of the Waifus fighting monsters on screen?
+    * B) Static portraits bumping into each other (card battler style)?
+    * C) Abstract effects/particle explosions over the background art?
+A9. It will need to be fairly abstract and simple to make it achievable, I'm thinking character portraits and a text based combat log that says what is happening and an engine for calculating the outcome of the battle based on the player's team and the enemy's team and the different attacks and abilities the player characters and the enemies have, I want it to be a deep complex rich simulated combat system but where the player just sets the position of their units and levels up and unlocks their different abilities and attacks and the enemies are randomly selected from a pool of enemies for each floor in the tower, and then we have some cool effects and particle effects that make the combat feel more engaging and dynamic, and you can see health bars going up and down in real time, and damage numbers popping out of players and companions and enemies as they take damage or receive healing. And that and the interesting combat log text and some sound effects will make the combat feel interesting and exciting while still be auto resolve so having setup strategy but no execution strategy. Maybe for a real time element the player can trigger a limit break move for each character which will be big damage or big group heals or other powerful effects and the player can time those and choose when to trigger them, the limit break button for each party member will start to flash once the party member or player's limit break guage is filled.
+
+Q10. **Avatar Role:** You mentioned picking an Avatar. Does the Player Avatar participate in the battle (have stats/gear), or are they just a "Commander" boosting the Waifus' stats?
+A10. They should be the commander, so their stats and level just boosts the stats of the hot waifu comapnions. E.g. the player's intimacy with a waifu should boost all of the stats of that waifu, so having max intimacy and unlocking all of the romance options for a given companion should make them a more effective party member in combat.
+
+Q11. **Floor Clearing:** Is a "Floor" cleared in one go, or does a floor consist of multiple "nodes" (e.g., 3 Mob battles + 1 Boss battle) requiring multiple days for a free player?
+A11. Nah, the player just explores the floor by going on hunts. And then goes for the boss when they think they are ready and then usually should have to grind a bit more on the current floor before moving to the next floor. I'd like the balance to be such that a free player who only does 5 Tsumego puzzles per day should be able to clear a floor in a day or two. And then that slowly gradually gets slower the higher you climb in the tower, until after the first 100 floors maybe it takes more like 10 days to clear a floor. So it gets harder the further you go, but its never impossible and the solution to that is to just grind more puzzles and get more stamina because eventaully you will be able to clear the floor. If a player pays and plays too much, like 100 tsumego puzzles per day every day then maybe they will go past the content that we've crafted they might find that they just can't progress to the next floor until more content is released for the game, but they will be able to continue to play the game, they just won't be able to level up any more, they will have reached max level and max floor, but if that happens for many players and we are successful then we can always just release more content to keep the game going. 
+
+### **Section C: Companions, Romance & Gacha**
+
+Q12. **Gacha Currency:** Is the "Roll for Companions" currency earned through gameplay (Spirit Stones), or is it exclusively the premium currency (Karma)?
+A12. Spirit stones are not a thing, that is a cringe stupid thing "spirit stones" it just sounds so stupid. See breakdown above regarding gacha currency.
+
+Q13. **Duplicate Logic:** You mentioned duplicates increase combat strength. Does this happen automatically, or does a duplicate provide "Shards" that the player must manually spend to upgrade the unit?
+A13. Drops of their essence and once you have enough gords worth of that waifu companions essence you can use that to increase her rank, level, stats, etc. 
+
+Q14. **Starting Party:** Does the player start with *one* specific Waifu (e.g., Ren the Kitsune), or do they get to choose their starter from a pool?
+A14. They start with talismans and get to roll for their first companion(s) like they will do going forward. Though actually yeah let's also give them one to start with, though she should be more like a pet who helps explain the game, though she can also fulfil the same function in combat as other companions the player summons and collars. The player will start with... a curious but cheeky and sarcastic and flirty neko yokai companion. 
+
+Q15. **Dating Sim Gameplay:** Are the "Dates" purely Visual Novel reading experiences, or are there choices/dialogue trees that can result in a "Bad Date" (no affection gain)?
+A15. Basically visual novel but the player should have choices during the date and should also be able to give gifts they've purchased from the in game shop. Girls like some gifts and hate other gifts and giving gifts they like during a date should improve the rewards and intimacy earned from a date and maybe also unlock additional scenes with that girl. 
+
+Q16. **Waifu Stats:** Do companions have distinct RPG roles (e.g., Tank, Healer, DPS) for the auto-battler, or is it a simple "Power Level" stat?
+A16. Yes. Tank, Healer, Physical DPS, Ranged DPS, (Magic and Physical Ranged DPS), Trappers, ALchemists, Control Type. Like go crazy with the different RPG roles and the ways the combat system works. The Combat system doesn't have to be balanced but it should be hard to min max and complex and interesting. It should be very hard to predict what the best strategy is and what stats and typings/roles to focus on, and it should depend on what combinations of enemies you come up against and the traits and attacks and abilities of the bosses you encounter on each floor. 
+
+### **Section D: Progression & Economy**
+
+Q17. **Daily Cap Implementation:** For free players, is the limit on *puzzles solved* (e.g., "You can only solve 5 puzzles today") or *rewards earned* (e.g., "You can solve infinite puzzles, but stop earning Spirit Stones after 5")?
+A17. Limit on puzzles they can solve or study per day. Let's assume 5 new puzzles per day and also 5 reviews of previously solved puzzles for free players.
+
+Q18. **Ascension/Prestige:** When a player "Ascends" (resets floor progress for bonuses), do they keep their collected Waifus and Affection levels, or does the harem reset too?
+A18. That isn't a thing. The player eventaually can reach max level and max floor but its framed as a temporary magical barrier that will be removed if they and demonstrate patience. (what will really happen is that we will continue to create new content so the tower can go on forever. Maybe we can find a way to procedurally generate the highest levels so the numbers just keep getting bigger and the player just starts to loop through the same pallets/tile sets for the tower section types, and also random selections from teh avaialble enemies and bosses but where the enemies stats just keep getting bigger and bigger and the player eventually will get stuck and have to grind because the bosses get so strong but the player then can just keep getting stronger themselves infinitely but again the main thing is just to create a sense of progress and purpose around the core thing of solving and practicing tsumego puzzles, so if the RPG/story/dating sim elements eventually start to loop while allowing to continue to allow the player to cotninue getting the sense of progress and purpose I think thats ok. If the game is popular and makes money maybe we can continue to hold events and add more content for high level players but we will see, let's just focus on making a few days worth of cotent intially and test the game and refine the concept before we start to worry about what would happen if players played the game for 1000s of hours.)
+
+Q19. **Equipment:** You mentioned "Items." Are there equippable items (Swords/Shields for Waifus), or just consumables (Gifts/Potions)?
+A19. No armor but maybe each Waifu can hold one magical item in combate that influences their stats and can maybe give them new abilities. Gifts and potions are consumables that either increase the companions intimacy with the player if they like the gift, or it gives them a temporary or permanent stat boost or something in terms of potions. 
+
+Q20. **Offline Gains:** Since this has "Idle RPG" inspirations, does the player earn resources while the game is closed (AFK farming), or strictly only when solving puzzles?
+A20. Nope - you can only progress if you solve tsumego puzzles. You are rewareded more for solving multiple tsumego puzzles per day and for successfully solving multiple tsumego puzzles in a row without making a mistake.
+
+### **Section E: Technical & UI Constraints**
+
+Q21. **Mobile Orientation:** We agreed on Portrait for Mobile. For the Desktop version, should the UI be responsive (stretch to fill landscape) or stay a fixed "mobile-app-shape" in the center of the screen with art borders?
+A21. I was hoping we could make do a balance of the two. The desktop version is a bit wider than normal mobile and some of the UI elements are on either side instead of top and bottom. So it looks natural and good on both desktop and mobile. Appreciate this might be a bit ambitious. I'm hoping we can make this work if we focus most of the player interaction in the central square 1:1 aspect ratio area of the screen on both mobile (vertical) and desktop (horizontal), that way the players focus and interaction is always in teh same area, and then the information and UI elements that just tell the player what is going on or whatever can be moved either to either side of the central square (for desktop) or to the top and bottom (for mobile). 
+
+Q22. **Asset Storage:** Since we are using pre-baked analysis files, this could generate a lot of JSON data. Are we okay with the initial download size being slightly larger to cache these, or should they strictly stream on demand?
+A22. The pre-baked tsuemgo puzzle files can be stored on the server and downloaded on demand by the client app. The puzzles the player saves / bookmarks can be stored on device, but the daily puzzles served to the player will be served live from the server as needed? At least I think this is how we would want it to work, maybe we make a not to test a few different approaches to confirm the right architecture for this aspect of the app. 
+
+Q23. **Touch vs. Click:** For Tsumego on mobile, do you want a "Tap to Place" (instant) or "Tap to Zoom/Confirm" (precision) interaction to prevent misclicks on 19x19 boards?
+A23. An option availble to the player on both mobile and desktop either one click or one tap to move, OR a place the stone and click a button to confirm/submit move. That way the player can choose their own preference and the app can be as simple as possible.
+
+Q24. **Tone of "Ecchi":** To be safe for Steam/App Stores, should we implement a "Safe Mode" toggle in settings that defaults to on?
+A24. That won't help us get featured on the steam and app stores, your age rating and whether you get approved to sell your app is based on the content of your app, not the settings of your app. So we just need to make sure that the content is never more lewd or mature than the many fanservice heavy gatcha dating sim games already on steam and the app stores. Its not a full on NSFW dating sim but it does have some mature themes and content and aims to provide lots of fan service and dating sim motivation, and caters to all sorts of special interests and fetishes etc. from dominant companions, to footwear preferences, smell preferences, different classic anime and manga personality types and tropes etc. The dating sim elements should be fun, sweet, funny, and spicy but without being too explicit or mature.
+
+Q25. **Account Sync:** Is cross-save (playing on Mobile then switching to Steam) a requirement for the MVP vertical slice, or a post-launch feature?
+A25. Ideally everyone should sign into the app with the same account (I guess we try to support sign in with the usual options for different platforms) and then you can play on any device. If that is going to be really difficult then I think its ok to initially at least have the player's account locked to the platform they signed up with. I don't want to include any PVP or multiplayer elements apart from leaderboards. 
+
+### **Section F: Content Generation**
+
+Q26. **Tagging:** For the "Classification Engine" (naming moves), do we need this for the MVP, or can the MVP launch with just "Correct/Incorrect" text?
+A26. Not needed for MVP launch but a nice to have we should keep on the backlog and consider exploring later. 
+
+Q27. **Board Customization:** Do different boards/stones affect gameplay (stats) or are they purely cosmetic?
+A27. Purely cosmetic, literally just swapping out graphical assets for the board, stones, and the effects that happen when you place a stone or get a capture or solve a puzzle correctly.
+
+Q28. **Boss Puzzles:** Are Boss Puzzles unique/hand-crafted, or just "Very Hard" procedurally generated puzzles?
+A28. No that isn't a thing. You fight a boss in the auto-battle JRPG combat on each floor but the tsumego puzzles are always just served based on the players current rank but they can choose to have a harder puzzle if they want. 
+
+Q29. **Story Integration:** Does the "Main Story" (The Mystery of the Tower) progress linearly with Floor count, or is it tied to the Affection levels of the Goddesses?
+A29. The overall story progresses with tower progress (let's say its the Demon Lord's tower, and he's passed laws that make it illegal to play go and so passionate go players are climbing the tower and using their love of Tsumego to tame the Yokai, Goddsesses, and Devils in the Demon Lord's army and climb the tower with the ultimate goal of defeating the Demon Lord and saving the world from his tyranny and oppression. However the player never actually reaches the top of the tower at least until maybe we want to add a final boss to the tower and an assention system where the player can then start over from the base of the tower with their stats and companions carrying over and the difficulty of the enemies in the tower significantly increasing.). The story / romance routes for each companion explored through the dating sim elements are also gated by progress through the tower, but also gated by the intimacy level with each companion. You have to reach a certain floor and max out a companion's intimacy level before you can complete that companion's romance story route and unlock a new outfit for that companion and their most powerful limit break attack/ability. 
+
+Q30. **Music/Audio:** Should the audio loop seamlessly or change dynamically as the "Streak" gets higher (getting more intense/exciting)?
+A30. Audio effects during Tsuemgo puzzles and combat, and then background music for while solving puzzles, for menus, and for combat and boss fights. 

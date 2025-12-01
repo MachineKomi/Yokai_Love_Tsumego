@@ -1,6 +1,6 @@
-Here are 30 targeted questions to clarify the specific mechanics, economy, and logic gaps in the design before we instruct the Gemini 3 Pro Agents to begin coding.
+# Designer Clarification Q&A
 
-Please answer these to the best of your current vision.
+This file should not be updated without the explicit approval of the designer. This Q&A should be considered the ground truth of the designer's vision for the game.
 
 ### **Section A: The Tsumego (Puzzle) Engine**
 

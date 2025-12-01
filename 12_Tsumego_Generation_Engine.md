@@ -57,7 +57,7 @@ The engine operates in a five-stage conveyor belt process.
   * **Process:** The script runs a full-game analysis using a local, high-strength KataGo engine.
   * **Logic:** It iterates through every move of the game, looking for sharp drops in winrate.
   * **Candidate Criteria:** A position becomes a puzzle candidate if:
-      * The actual move played lost significantly (e.g., \> 15% winrate drop OR \> 5 points score loss).
+      * The actual move played lost significantly (e.g., > 15% winrate drop OR > 5 points score loss).
       * The game state before the move was relatively close (not already a 99% blowout).
 
 ### Stage 2: The Localizer (Cropping)
@@ -67,7 +67,7 @@ Tsumego are usually local problems, not full-board ones.
   * **Input:** Full board state at the moment of the blunder.
   * **Process:**
     1.  Identify the "active stones" (the group that died/lived due to the blunder).
-    2.  Calculate a bounding box around these stones plus a padding of \~3 intersections.
+    2.  Calculate a bounding box around these stones plus a padding of ~3 intersections.
     3.  **Crucial Verification:** Run KataGo on the *cropped* position. Does the life/death status match the *full* board state? If cropping cuts off a vital ladder breaker or connecting stone outside the box, the puzzle is invalid and must be discarded.
 
 ### Stage 3: The Validator (Uniqueness Check)
@@ -94,6 +94,15 @@ A good puzzle must have exactly one clear correct move.
       * **Score swing:** How subtle is the winning move?
   * **Mapping:** The score is mapped to our database enum (`25k`, `10k`, `1d`, etc.).
   * **Tagging:** AI heuristically tags the puzzle based on location (`corner`, `side`) and detected shapes (`snapback`, `liberty-shortage`).
+
+### Stage 6: The Multiplier (Permutation Engine)
+
+To maximize content efficiency, every valid puzzle is expanded into 8 variations.
+
+1.  **Rotations:** 0°, 90°, 180°, 270°.
+2.  **Flips:** Mirror X (or Color Swap if applicable).
+3.  **Output:** 1 Raw Puzzle $\rightarrow$ 8 Unique Database Entries.
+    *   *Note:* Each variation gets a unique ID but shares the `source_sgf_hash` for deduplication logic if needed.
 
 -----
 
@@ -125,7 +134,7 @@ The final output of a generation run is a large `puzzles.jsonl` (JSON Lines) fil
 
 ### Seeding Workflow
 
-1.  Run generation script -\> produces `output_v1.jsonl`.
+1.  Run generation script -> produces `output_v1.jsonl`.
 2.  Run a TypeScript/Node script that reads the JSONL, sorts puzzles by difficulty, assigns floor numbers dynamically, and generates a massive SQL `INSERT` statement.
 3.  This SQL is saved as a Supabase migration file (e.g., `supabase/migrations/20251129_seed_puzzles.sql`) and pushed to production.
 
@@ -138,3 +147,22 @@ AI generation isn't perfect. We need a review step.
   * **The "Puzzle Browser" Tool:** A simple local-only web page (React+PixiJS) that loads the generated JSONL file.
   * **Workflow:** The developer quickly clicks through generated puzzles. They can press 'D' to delete bad puzzles (boring ladders, unclear shapes) or 'A' to approve them.
   * **Final Polish:** Only approved puzzles make it into the final database seed script.
+
+-----
+
+## 6. Evaluation Strategy: Pre-baked vs. Live Analysis
+
+To ensure the "Pre-baked" approach is sufficient for a premium experience, we must validate it against Live Analysis during the prototype phase.
+
+### A. The Hypothesis
+We believe that for 95% of Tsumego (which are local problems), a pre-calculated tree of depth 3-5 covers all reasonable human moves. Live KataGo analysis on the client is a fallback, not the primary engine.
+
+### B. The Test Plan
+1.  **Generate a Test Batch:** Create 100 puzzles using the pipeline.
+2.  **Human Testing:** Have a strong player (Dan level) attempt to "break" the puzzle by playing valid but non-optimal moves that might not be in the pre-baked tree.
+3.  **Success Criteria:**
+    *   If the pre-baked tree contains the refutation for the human's move, it is a **Pass**.
+    *   If the game says "Wrong Move" but cannot show *why* (because the move wasn't in the tree), it is a **Fail**.
+4.  **Decision Gate:**
+    *   If Failure Rate < 5%: We proceed with Pre-baked only (and maybe a generic "Incorrect" message for unknown moves).
+    *   If Failure Rate > 5%: We **MUST** implement the Client-Side KataGo (WASM) fallback to handle these edge cases in real-time.

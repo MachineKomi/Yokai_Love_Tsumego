@@ -4,7 +4,7 @@ It relies heavily on **Row Level Security (RLS)**, which is Supabase's primary m
 
 -----
 
-# 05\_Database\_Schema.md
+# 05_Database_Schema.md
 
 # Database Schema & Security Policies
 
@@ -14,17 +14,17 @@ It relies heavily on **Row Level Security (RLS)**, which is Supabase's primary m
 
 -----
 
-## 1\. Design Principles & Conventions
+## 1. Design Principles & Conventions
 
   * **Supabase Auth Integration:** The core user identity is managed by Supabase Auth's internal `auth.users` table. Our custom data links to this via the `profiles.id` foreign key.
   * **Row Level Security (RLS) is Mandatory:** Every table created in the `public` schema must have RLS enabled immediately to prevent accidental data leaks.
   * **Client-Side Trust Model:** For the MVP, we lean on client-side validation for puzzle solving, verified by database constraints. (e.g., The client checks the move against the WASM engine, then inserts a record into `player_puzzle_history`. RLS ensures they can only insert for themselves). Future iterations may move validation to Edge Functions.
   * **JSONB Usage:** We use structured columns for relational data but utilize `JSONB` for flexible metadata (e.g., puzzle tags, specific SGF properties) to avoid over-normalizing the schema.
-  * **Naming:** Snake\_case for all table and column names.
+  * **Naming:** Snake_case for all table and column names.
 
 -----
 
-## 2\. Custom Types & Enums
+## 2. Custom Types & Enums
 
 Define these first to ensure consistency across tables.
 
@@ -44,7 +44,7 @@ CREATE TYPE companion_archetype AS ENUM ('tsundere', 'genki', 'yamato_nadeshiko'
 
 -----
 
-## 3\. Core Tables (User & Economy)
+## 3. Core Tables (User & Economy)
 
 ### 3.1 Table: `profiles`
 
@@ -57,16 +57,25 @@ CREATE TABLE profiles (
   avatar_url TEXT,
   
   -- Economy
-  spirit_stones INT NOT NULL DEFAULT 0 CHECK (spirit_stones >= 0),
-  karma INT NOT NULL DEFAULT 0 CHECK (karma >= 0),
+  mana INT NOT NULL DEFAULT 0 CHECK (mana >= 0),
+  crystalline_aji INT NOT NULL DEFAULT 0 CHECK (crystalline_aji >= 0),
+  gold INT NOT NULL DEFAULT 0 CHECK (gold >= 0),
+  stamina INT NOT NULL DEFAULT 0 CHECK (stamina >= 0),
+  talismans INT NOT NULL DEFAULT 0 CHECK (talismans >= 0),
+  magical_collars INT NOT NULL DEFAULT 0 CHECK (magical_collars >= 0),
   
   -- Tower Progression
   current_floor INT NOT NULL DEFAULT 1 CHECK (current_floor > 0),
   highest_floor INT NOT NULL DEFAULT 1 CHECK (highest_floor > 0),
   
   -- Streak mechanics
-  current_streak INT NOT NULL DEFAULT 0 CHECK (current_streak >= 0),
+  mana_streak INT NOT NULL DEFAULT 0 CHECK (mana_streak >= 0),
+  study_streak INT NOT NULL DEFAULT 0 CHECK (study_streak >= 0),
+  mana_shields INT NOT NULL DEFAULT 0 CHECK (mana_shields >= 0),
+  study_shields INT NOT NULL DEFAULT 0 CHECK (study_shields >= 0),
+  
   last_active_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  last_study_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -88,7 +97,7 @@ CREATE POLICY "Users can update own profile" ON profiles
 
 -----
 
-## 4\. Gameplay Content Tables (Puzzles & Tower)
+## 4. Gameplay Content Tables (Puzzles & Tower)
 
 ### 4.1 Table: `puzzles`
 
@@ -159,7 +168,7 @@ CREATE POLICY "Users insert own puzzle results" ON player_puzzle_history
 
 -----
 
-## 5\. Companion & Metagame Tables (The Waifus)
+## 5. Companion & Metagame Tables (The Waifus)
 
 ### 5.1 Table: `companions` (Static Definitions)
 
@@ -171,10 +180,14 @@ CREATE TABLE companions (
   display_name TEXT NOT NULL,
   description TEXT NOT NULL,
   archetype companion_archetype NOT NULL,
+  role TEXT NOT NULL, -- 'tank', 'healer', 'dps_phys', 'dps_magic', 'trapper', 'alchemist', 'control'
   
   -- Assets
   base_sprite_url TEXT NOT NULL,
   portrait_url TEXT NOT NULL,
+  
+  -- RPG Data
+  base_stats JSONB DEFAULT '{"hp": 100, "atk": 10, "def": 10}'::jsonb,
   
   -- Unlocking logic
   unlock_floor_requirement INT, -- e.g., beat floor 10 boss to unlock
@@ -203,6 +216,10 @@ CREATE TABLE player_companions (
   
   -- Progression
   affection_level INT NOT NULL DEFAULT 0 CHECK (affection_level >= 0 AND affection_level <= 100),
+  rank INT NOT NULL DEFAULT 1, -- Increased by Essence
+  level INT NOT NULL DEFAULT 1, -- Increased by Mana/Aji
+  essence_count INT NOT NULL DEFAULT 0, -- From duplicates
+  
   is_favorite BOOLEAN DEFAULT FALSE, -- Who appears on the home screen
   
   unlocked_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -226,9 +243,47 @@ CREATE POLICY "Users update own companion state" ON player_companions
 
 -----
 
-## 6\. Triggers & Automation
+## 6. Inventory System
 
-### 6.1 Profile Creation Trigger
+### 6.1 Table: `items` (Definitions)
+```sql
+CREATE TABLE items (
+  id TEXT PRIMARY KEY, -- 'gift_sake', 'skin_wood', 'shield_mana'
+  type TEXT NOT NULL, -- 'gift', 'skin', 'consumable'
+  name TEXT NOT NULL,
+  description TEXT,
+  cost_gold INT
+);
+
+ALTER TABLE items ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Items are public read-only" ON items FOR SELECT USING (true);
+```
+
+### 6.2 Table: `player_inventory`
+```sql
+CREATE TABLE player_inventory (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id) NOT NULL,
+  item_id TEXT REFERENCES items(id) NOT NULL,
+  quantity INT NOT NULL DEFAULT 1 CHECK (quantity >= 0),
+  
+  UNIQUE(user_id, item_id)
+);
+
+ALTER TABLE player_inventory ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users view own inventory" ON player_inventory
+  FOR SELECT USING (auth.uid() = user_id);
+  
+CREATE POLICY "Users update own inventory" ON player_inventory
+  FOR UPDATE USING (auth.uid() = user_id);
+```
+
+-----
+
+## 7. Triggers & Automation
+
+### 7.1 Profile Creation Trigger
 
 Automatically creates a `profile` entry when a new user signs up via Supabase Auth.
 

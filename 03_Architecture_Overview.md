@@ -83,6 +83,12 @@ The frontend is split into two distinct rendering layers that must communicate:
 
 **Why split them?** Rendering 361 interactive stones + complex glowing particle effects directly in the React DOM causes performance stuttering on mobile. PixiJS handles this effortlessly via WebGL.
 
+**UX Strategy: The "Central Square"**
+To ensure consistency across Desktop (Landscape) and Mobile (Portrait), the core gameplay area (the Go Board) is strictly constrained to a **1:1 aspect ratio container**.
+*   **Desktop:** The square sits in the center; info panels flank left/right.
+*   **Mobile:** The square sits in the center; info panels stack above/below.
+*   **Input:** User configurable "One Tap Move" (Speed) or "Tap to Place + Tap to Confirm" (Precision).
+
 ### B. The Go AI Engine (KataGo)
 
 We use KataGo in two different roles:
@@ -101,7 +107,8 @@ We use KataGo in two different roles:
 We utilize the standard Supabase stack.
 
   * **PostgreSQL Database:** Stores user profiles, game progress (floors cleared), puzzle data (SGF strings, solutions), and companion unlock states. We rely heavily on **Row Level Security (RLS)** to ensure users can only access their own data.
-  * **GoTrue (Auth):** Handles secure sign-up/login via Email and potentially social providers. Generates the JWTs used to secure database requests.
+  * **GoTrue (Auth):** Handles secure sign-up/login.
+    *   *MVP Note:* We will use **Platform-locked Accounts** initially (Steam ID / Device ID) to simplify development. Cross-save architecture will be designed but not implemented for V1.
   * **Storage:** An S3-compatible bucket storing all the high-resolution Waifu sprites, background art, and audio files. The client fetches these via public URLs.
 
 -----

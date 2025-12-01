@@ -20,6 +20,32 @@ The Yokai represent **Emotion and Chaos**. They are powerful spirits trapped in 
 **The Player's Role:** You are their anchor. Through the logic of Go, you help them focus their chaotic energy.
 **The "90s OVA" Aesthetic Rule:** All designs must feel hand-drawn and painterly. Avoid modern, glossy, "vtuber-style" designs. Think *Inuyasha*, *Ranma ½*, or *Tenchi Muyo* aesthetics.
 
+### Progression & Duplicates
+*   **Essence:** Pulling a duplicate of a Yokai grants "Essence" specific to that character.
+*   **Rank Up:** Essence is used to increase the Yokai's **Rank** (Stars), boosting their Base Stats and unlocking new Limit Break tiers.
+*   **Level Up:** Mana/Aji is used to increase **Level**, boosting stats linearly.
+
+---
+
+## Character 00: Tama (The Neko Guide)
+
+**Archetype:** The Sarcastic Pet / Tutorial Guide / Mascot.
+**Role:** Starter Companion.
+**Go Playstyle Metaphor:** "Saboteur." Points out obvious mistakes with snark.
+
+### A. Lore & Backstory
+A two-tailed Neko (cat) yokai who claims to be the former guardian of the tower, now reduced to a small, floating cat form due to the Demon Lord's curse. She guides the player not out of kindness, but because she needs a "meat shield" to climb back up. She is cheeky, sarcastic, and constantly demands snacks.
+
+### B. Visual Design Spec (For Niji v6)
+*   **Vibe:** Cute but grumpy, expressive, mascot-like.
+*   **Key Features:** White fur with black spots, two tails, wearing a large red prayer bead necklace. Floating.
+*   **Expression:** Smug, yawning, or judging the player's moves.
+
+### C. Dialogue Voice (Examples)
+*   **Greeting:** "Oi, human. Feed me before you play. I can't think on an empty stomach."
+*   **Puzzle Success:** "Not bad. For a hairless ape."
+*   **Puzzle Failure:** "Wow. Even a dog would have seen that ladder. Embarrassing."
+
 ---
 
 ## Character 01: Ren (The Kitsune Guide)

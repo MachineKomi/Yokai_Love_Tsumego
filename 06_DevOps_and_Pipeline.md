@@ -117,21 +117,18 @@ The `supabase/seed.sql` file contains SQL insert statements to create dummy user
 
 This is the workflow for generating the game's assets outside of the main engine.
 
-### A. Puzzle Generation (Python -\> SQL)
+### A. Puzzle Generation (Python -> SQL)
 
-This is an "Offline" process run periodically to build up the content library.
+The `generate_puzzles.py` script (defined in `12_Tsumego_Generation_Engine.md`) is the heart of the content pipeline.
 
-1.  **Location:** `/tools/puzzle-generator`
-2.  **Input:** Place raw SGF files (pro games) in `/tools/sgf_library`.
-3.  **Process:** Run the Python script (e.g., `python generate_puzzles.py`).
-      * *The script uses KataGo to analyze games, detect blunders, crop the board, validate unique solutions, and output a large `puzzles.json` file.*
-4.  **Ingestion:** Run the SQL generation script to convert `puzzles.json` into a SQL insert statement, and append it to a migration file or the `seed.sql` file to get it into the database.
-
-### B. Art Asset Management (Public vs. Private)
-
-  * **Raw Assets (PRIVATE):** High-resolution PSDs, raw Midjourney outputs, and layered files should be kept in a private backup folder outside the main repo (or a private submodule) to avoid bloating Git history.
-  * **Game-Ready Assets (PUBLIC):** Processed, optimized files go into `/public/assets/`.
-      * **Format:** `.webp` for virtually everything (sprites, backgrounds).
+1.  **Input:** A folder of SGF files (Pro games, AI self-play).
+2.  **Process:**
+    *   **Blunder Detection:** Finds mistakes.
+    *   **Cropping:** Isolates the local position.
+    *   **Permutation:** Expands each puzzle into **8 variations** (Rotations/Flips).
+    *   **Validation:** Ensures unique solutions via KataGo.
+3.  **Output:** A `puzzles.jsonl` file.
+4.  **Ingestion:** Run the seeding script to insert these into the local Supabase instance.
       * **Naming Convention:**
           * Backgrounds: `bg_[biome]_[variation].webp` (e.g., `bg_cloud_shrine_day.webp`)
           * Sprites: `ch_[name]_[outfit]_[expression].webp` (e.g., `ch_kitsune_kimono_blush.webp`)

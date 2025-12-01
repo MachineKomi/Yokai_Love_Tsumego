@@ -17,11 +17,11 @@ It is structured to give clear instructions to human writers or AI text generati
 
 **The World is Chaos. Logic is Magic.**
 
-Reality is maintained by the "Great resonance"—a cosmic harmony composed of perfect logic and balance. The physical manifestation of this resonance is the **Celestial Spire**, an infinite tower that connects the Mortal Realm, the Spirit Realm (Yokai), and the Divine Realm (Goddesses).
+Reality is maintained by the "Great Resonance"—a cosmic harmony composed of perfect logic and balance. The physical manifestation of this resonance is the **Celestial Spire**.
 
-Recently, a corruption known as the **Miasma of Doubt** has seeped into the Spire. The Miasma is born from human cognitive bias, fear of failure, and illogical thinking. It manifests as corrupted spirits and impossible, jagged landscapes that block ascent.
+**The Conflict:** The **Demon Lord** has risen and banned the practice of Go, declaring it "dangerous magic." He has shrouded the Spire in the **Miasma of Doubt**, a corruption born from cognitive bias and fear.
 
-**The Hook:** Conventional weapons cannot harm the Miasma. It can only be dispelled by asserting **Order**. In this universe, the purest ritual of Order is the game of Go. Placing stones in the perfect, logical sequence (solving a Tsumego) creates a harmonic resonance that purifies the surrounding area and creates a path forward.
+**The Hook:** Conventional weapons cannot harm the Miasma. It can only be dispelled by asserting **Order**. Placing stones in the perfect, logical sequence (solving a Tsumego) creates a harmonic resonance that purifies the area and weakens the Demon Lord's grip.
 
 ---
 
@@ -43,7 +43,10 @@ The companions are spirits trapped or dwelling within the Spire's different stra
 * **Origin:** Manifestations of folklore and nature trapped in the lower to mid-levels of the tower.
 * **Nature:** They are creatures of pure instinct and emotion. They possess raw power but lack discipline, often falling victim to their own chaotic natures (making them "bad at Go" initially).
 * **Relationship Dynamic:** "The Taming of the Shrew." The player uses logic to help focus their chaotic energy. The romance comes from the Yokai learning to trust and submit to the player's guiding intellect, transforming from wild spirits into devoted partners.
-* **Example Archetypes:** The mischievous Kitsune who pranks you when you miss a Tesuji; the aggressive Oni who wants to smash the board instead of reading ladder breakers.
+* **Example Archetypes:**
+    *   **Tama (Starter):** A cheeky Neko Yokai who guides you (for snacks).
+    *   **Ren:** The mischievous Kitsune who pranks you when you miss a Tesuji.
+    *   **Kagara:** The aggressive Oni who wants to smash the board.
 
 ### B. The Goddesses (Spirits of Logic)
 * **Origin:** Astral projections from the Divine Realm at the tower's zenith. They are personifications of supreme algorithms (e.g., AlphaZero, KataGo).

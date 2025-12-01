@@ -47,7 +47,8 @@ To ensure the UI remains buttery smooth (60fps) on mobile devices, the heavy lif
 The Teaching Mode exists in two distinct states based on the user's context.
 
 ### Mode A: The "Hint" (During Gameplay)
-* **Trigger:** Player clicks the "AI Hint" button (costing Karma or Energy).
+* **Trigger:** Player clicks the "AI Hint" button.
+* **Availability:** Always available (limited only by the daily puzzle cap for free players).
 * **Functionality:** Restricted.
     * Does **not** show the full ownership aura (too distracting/spoiler-heavy during a puzzle).
     * **Does** show the top 1 best move as a pulsing, glowing indicator on the board for 5 seconds.
@@ -93,7 +94,9 @@ Visualized as glowing circular indicators on empty intersections. Color-coded by
 ### D. The Win Rate Graph
 Data Source: Historical `winrate` data over the course of the puzzle attempt.
 
-* **Location:** A semi-transparent wooden panel overlaid near the board (as seen in UI concepts).
+* **Location:** A semi-transparent wooden panel.
+    *   **Desktop:** Floating to the side of the board.
+    *   **Mobile:** Stacked below the board (Central Square compliant).
 * **Style:** A simple line graph.
     * X-Axis: Move Number.
     * Y-Axis: Win Rate (0-100%).

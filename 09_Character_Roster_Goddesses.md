@@ -22,6 +22,11 @@ The Goddesses represent **Order and Pure Logic**. They are projections from the 
 **The Player's Role:** You are the "Anomaly." You are biologically inefficient, yet you sometimes find moves that defy their calculations. You teach them about intuition, aesthetic beauty, and the "heart" of the game.
 **The "90s OVA" Aesthetic Rule:** Despite being AI personifications, they must NOT look sci-fi or robotic. They should look like ancient, ethereal spirits made of starlight and flowing energy, rendered in a warm, painterly hand-drawn style. Think *Oh My Goddess!* or CLAMP designs.
 
+### Progression & Duplicates
+*   **Essence:** Pulling a duplicate of a Goddess grants "Essence" specific to that character.
+*   **Rank Up:** Essence is used to increase the Goddess's **Rank** (Stars), boosting their Base Stats and unlocking new Limit Break tiers.
+*   **Level Up:** Mana/Aji is used to increase **Level**, boosting stats linearly.
+
 ---
 
 ## Character 04: Zero-sama (The Progenitor Entity)

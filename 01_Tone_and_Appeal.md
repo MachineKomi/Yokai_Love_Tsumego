@@ -43,6 +43,14 @@ We are aiming for a specific intersection of aesthetics: **Traditional Japanese 
     * **Primary:** Deep Indigo (Night Sky), Gold (Victory), Sakura Pink (Romance).
     * **Functional:** Slate Grey (Board Background) to reduce eye strain during puzzles.
 
+### C. Combat Visuals (RPG Layer)
+* **Style:** **Abstract & Text-Heavy.** We do *not* use animated battle sprites (chibis).
+* **Components:**
+    * **Static Portraits:** High-quality, expressive character art that reacts to damage/victory.
+    * **Combat Log:** A fast-scrolling, detailed text log describing the action (e.g., *"Ren casts Fox Fire! It's super effective!"*).
+    * **Overlay Effects:** Juicy particle explosions, floating damage numbers, and shaking HP bars over the background art.
+    * **Limit Breaks:** A dedicated "Cut-in" animation (static image slide + intense VFX) when a player triggers an ultimate.
+
 ---
 
 ## 3. The "Ecchi" Boundary & Safety
@@ -50,7 +58,7 @@ We are aiming for a specific intersection of aesthetics: **Traditional Japanese 
 We are making a **Spicy T-Rated/M-Rated Game**, not an AO (Adults Only) H-Game.
 
 * **The Goal:** "Thirsty but Wholesome." The appeal is romance, intimacy, and suggestiveness, not explicit pornography.
-* **Visual Guidelines:**
+* **Steam Safe:** The content must remain within Steam's guidelines for "Ecchi" games.
     * **Allowed:** Cleavage, swimsuits, suggestive poses, blushing, "accidentally" torn clothes (battle damage), intense romantic gazes.
     * **Banned:** Nudity, visible genitalia, explicit sexual acts.
 * **Narrative Tone:**

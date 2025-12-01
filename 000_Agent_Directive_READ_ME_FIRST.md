@@ -1,12 +1,4 @@
-### The Final Core File: The "Agent Meta-Guide"
-
-This file is the most crucial one for maintaining project coherence. It tells the agents how to use the other 12 files and enforces the rule that documentation must live and breathe with the code.
-
-**File Name:** `000_Agent_Directive_READ_ME_FIRST.md`
-
-***
-
-# 000\_Agent\_Directive\_READ\_ME\_FIRST.md
+# 000_Agent_Directive_READ_ME_FIRST.md
 
 # THE PRIME DIRECTIVE: Documentation is Truth
 **Project:** Tsumego Tower
@@ -32,52 +24,34 @@ A project where documentation lags behind code is a project destined to fail. Ke
 
 ## 2. The Documentation Map (Where to look)
 
-Use this table to determine which file governs the task you are currently performing.
+Use this index to locate the specific "Source of Truth" for any given task.
 
-| If you are working on... | You MUST reference... |
-| :--- | :--- |
-| **Understanding the overall vision, loop, and monetization.** | `00_Game_Design_Document.md` |
-| **Generating art prompts, writing CSS, or designing UI components.** | `01_Tone_and_Appeal.md` AND `02_Art_Style_Bible.md` |
-| **Choosing libraries, setting up frameworks, or understanding the stack.** | `03_Architecture_Overview.md` |
-| **Writing code, naming variables, structuring folders, or creating components.** | `04_Tech_Spec_and_Conventions.md` |
-| **Writing SQL, creating migrations, or fetching data in the frontend.** | `05_Database_Schema.md` |
-| **Running the local dev environment, seeding data, or building for deployment.** | `06_DevOps_and_Pipeline.md` |
-| **Writing narrative text, character dialogue, or world-building flavor text.** | `07_Story_and_World_Bible.md` |
-| **Creating assets or dialogue specifically for Yokai characters.** | `08_Character_Roster_Yokai.md` |
-| **Creating assets or dialogue specifically for Goddess characters.** | `09_Character_Roster_Goddesses.md` |
-| **Working on the Python script that generates puzzles offline.** | `10_Tsumego_Algorithm_Spec.md` AND `12_Tsumego_Generation_Engine.md` |
-| **Implementing the real-time KataGo WASM analysis or PixiJS visualizations.** | `11_Teaching_Mode_Spec.md` |
+### Core Vision & Design
+*   **[00_Game_Design_Document.md](file:///c:/GameDev/YokaiLoveTsumego/00_Game_Design_Document.md):** The "Constitution". Core mechanics, economy, and progression.
+*   **[01_Tone_and_Appeal.md](file:///c:/GameDev/YokaiLoveTsumego/01_Tone_and_Appeal.md):** The "Vibe Check". Emotional pillars, "Intellectual Heroism", and "Steam Safe" boundaries.
+*   **[02_Art_Style_Bible.md](file:///c:/GameDev/YokaiLoveTsumego/02_Art_Style_Bible.md):** Visual language, AI art prompts, and UI aesthetics ("Nostalgic 90s OVA").
+*   **[07_Story_and_World_Bible.md](file:///c:/GameDev/YokaiLoveTsumego/07_Story_and_World_Bible.md):** Narrative lore, Demon Lord, and world logic.
+*   **[13_core_gameplay_loop.md](file:///c:/GameDev/YokaiLoveTsumego/13_core_gameplay_loop.md):** Detailed breakdown of the loops (Immediate, Short, Medium, Long) and Streak mechanics.
 
----
+### Technical Specifications
+*   **[03_Architecture_Overview.md](file:///c:/GameDev/YokaiLoveTsumego/03_Architecture_Overview.md):** High-level stack (Tauri, React, PixiJS, Supabase) and "Central Square" UI strategy.
+*   **[04_Tech_Spec_and_Conventions.md](file:///c:/GameDev/YokaiLoveTsumego/04_Tech_Spec_and_Conventions.md):** Coding standards, folder structure, and library versions.
+*   **[05_Database_Schema.md](file:///c:/GameDev/YokaiLoveTsumego/05_Database_Schema.md):** PostgreSQL schema, RLS policies, and data types.
+*   **[06_DevOps_and_Pipeline.md](file:///c:/GameDev/YokaiLoveTsumego/06_DevOps_and_Pipeline.md):** Local development workflow, migrations, and content pipeline.
 
-## 3. Workflow Constraints (Non-Negotiable)
+### Feature Specifications
+*   **[10_Tsumego_Algorithm_Spec.md](file:///c:/GameDev/YokaiLoveTsumego/10_Tsumego_Algorithm_Spec.md):** Requirements for the offline puzzle generation script (Python).
+*   **[11_Teaching_Mode_Spec.md](file:///c:/GameDev/YokaiLoveTsumego/11_Teaching_Mode_Spec.md):** Requirements for the client-side AI analysis (God's Eye, Emotional Aura).
+*   **[12_Tsumego_Generation_Engine.md](file:///c:/GameDev/YokaiLoveTsumego/12_Tsumego_Generation_Engine.md):** Architecture of the "Content Factory" pipeline.
 
-1.  **Local-First Development:** You must assume there is no internet connection to the production cloud. All development happens against Supabase Local via Docker.
-2.  **Asset Protection:** You must never commit high-resolution art assets to the public git repository. Ensure `.gitignore` is correctly configured for `/assets-src` (raw) and `/public/assets` (game-ready).
-3.  **Hybrid Tech Stack:** Respect the boundary between React (UI/Menus) and PixiJS (Board/VFX). Do not try to render 361 stones using HTML DOM elements.
-
-***
-
-### The Initial Prompt to the Antigravity Agent
-
-Copy and paste the text below into your first session with the Gemini 3 Pro coding agent in your IDE.
+### Content Data
+*   **[08_Character_Roster_Yokai.md](file:///c:/GameDev/YokaiLoveTsumego/08_Character_Roster_Yokai.md):** Yokai companion definitions (Tama, Ren, Kagara, Miyuki).
+*   **[09_Character_Roster_Goddesses.md](file:///c:/GameDev/YokaiLoveTsumego/09_Character_Roster_Goddesses.md):** Goddess companion definitions (Zero, Kata).
 
 ---
 
-**PROMPT START**
+## 3. The Mission: Phase 1 Vertical Slice
 
-Hello Agent. We are starting a new project called "Tsumego Tower".
-
-It is a hybrid mobile/desktop game that combines rigorous Go (Baduk/Weiqi) puzzles with a 90s anime-style dating sim aesthetic.
-
-I have already done the heavy lifting of defining the entire project. Your immediate task is to absorb this context and then execute the setup for the initial "Vertical Slice" prototype.
-
-### 1. The Context Inputs
-In the root of this repository, you will find a series of numbered Markdown files ranging from `000_Agent_Directive_READ_ME_FIRST.md` to `12_Tsumego_Generation_Engine.md`.
-
-**Action:** Read file `000_Agent_Directive_READ_ME_FIRST.md` first. It explains the rules of engagement and how to use the other documents. Then, read all remaining documents to build a comprehensive mental model of the product, architecture, art style, and technical constraints.
-
-### 2. The Mission: Phase 1 Vertical Slice
 Our immediate goal is NOT the full game. It is the "Skeleton" phase defined in section 8 of `00_Game_Design_Document.md`.
 
 We need to prove that our hybrid tech stack works. The success criteria for this session are:
@@ -86,13 +60,19 @@ We need to prove that our hybrid tech stack works. The success criteria for this
 3.  We can load the React frontend in a Tauri window.
 4.  The frontend successfully connects to the local Supabase database, fetches a single static SGF puzzle string, and renders it on a PixiJS board.
 
-### 3. Constraints & Rules
+---
+
+## 4. Constraints & Rules
+
 * **Strict Adherence:** Follow the technology choices and folder structure defined in `03_Architecture_Overview.md` and `04_Tech_Spec_and_Conventions.md`.
 * **Local Only:** Do not attempt to connect to any cloud services. Use Supabase CLI and Docker locally.
 * **Version Control:** Initialize a git repository immediately.
 * **Asset Safety:** Before creating any other files, create a `.gitignore` file that excludes `/public/assets` and `/assets-src` to ensure we don't accidentally commit future proprietary art assets to a public repo.
 
-### 4. Execution Plan
+---
+
+## 5. Execution Plan
+
 Please proceed with the following steps. Stop after each step to confirm successful execution before moving to the next.
 
 **Step 1: Initialization & Safety**
@@ -109,7 +89,3 @@ Create the basic React component structure. Implement a minimal PixiJS board ren
 
 **Step 5: The Vertical Slice Connection**
 Manually insert one row of dummy puzzle data into your local `puzzles` table via Supabase Studio. Modify the React frontend to fetch this puzzle via the Supabase JS client and render it on the PixiJS board.
-
-Let's begin with Step 1.
-
-**PROMPT END**

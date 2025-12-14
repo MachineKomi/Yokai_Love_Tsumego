@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/joseki_tree_v1.schema.json",
+  "title": "Joseki Tree Schema (v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "version", "board_size", "root_node_id", "nodes"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "version": { "const": 1 },
+    "board_size": { "type": "integer", "minimum": 1, "maximum": 25 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "root_node_id": { "type": "string", "minLength": 1 },
+    "nodes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_id", "move", "children"],
+        "properties": {
+          "node_id": { "type": "string", "minLength": 1 },
+          "move": {
+            "description": "KataGo-style move like 'D4', or null for the root.",
+            "type": ["string", "null"]
+          },
+          "comment": { "type": "string" },
+          "side_to_play_after": { "enum": ["B", "W"] },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["node_id"],
+              "properties": {
+                "node_id": { "type": "string", "minLength": 1 },
+                "label": { "type": "string" },
+                "weight": {
+                  "description": "Optional probability/popularity weight for UI ordering.",
+                  "type": "number",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

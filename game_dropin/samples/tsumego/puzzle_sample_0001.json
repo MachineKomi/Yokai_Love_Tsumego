@@ -1,0 +1,67 @@
+{
+  "uuid": "sample_0001",
+  "timestamp": "2025-12-14T00:00:00Z",
+  "generated_by": "The_Chameleon",
+  "generator_settings": {
+    "temperature": 1.23,
+    "max_visits": 50,
+    "temp_style": "creative",
+    "depth_style": "casual",
+    "human_rank": "rank_10k"
+  },
+  "puzzle_type": "life_and_death_blunder",
+  "board_size": 9,
+  "setup_moves": [
+    ["B", "D4"],
+    ["W", "E4"],
+    ["B", "D5"],
+    ["W", "E5"],
+    ["B", "C4"],
+    ["W", "F4"],
+    ["B", "C5"]
+  ],
+  "color_to_play": "W",
+  "blunder": {
+    "move": "F5",
+    "winrate_before": 0.94,
+    "winrate_after": 0.12,
+    "delta": 0.82
+  },
+  "solution": {
+    "correct_move": "C6",
+    "referee_winrate": 0.98,
+    "referee_visits": 600,
+    "policy_prior": 0.03,
+    "difficulty_metrics": {
+      "visits_to_solve": 600,
+      "policy_prior": 0.03
+    }
+  },
+  "analysis": {
+    "policy_distribution": [
+      { "move": "C6", "policy": 0.03, "winrate": 0.98, "visits": 420 },
+      { "move": "B6", "policy": 0.07, "winrate": 0.91, "visits": 120 },
+      { "move": "D6", "policy": 0.12, "winrate": 0.86, "visits": 60 }
+    ],
+    "wrong_move_refutation": [
+      { "response": "C6", "winrate": 0.95 },
+      { "response": "D6", "winrate": 0.88 }
+    ]
+  },
+  "metadata": {
+    "ownership": [
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.1, 0.2, -0.2, -0.1, 0.0, 0.0,
+      0.0, 0.0, 0.2, 0.7, 0.6, -0.6, -0.3, 0.0, 0.0,
+      0.0, 0.0, 0.1, 0.8, 0.7, -0.7, -0.2, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.3, 0.2, -0.2, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+    ],
+    "score_lead": 8.5,
+    "position_hash": "deadbeefcafe"
+  }
+}
+

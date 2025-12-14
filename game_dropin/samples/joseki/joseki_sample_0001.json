@@ -1,0 +1,53 @@
+{
+  "id": "joseki_sample_0001",
+  "version": 1,
+  "board_size": 9,
+  "tags": ["sample", "integration", "corner"],
+  "root_node_id": "n0",
+  "nodes": {
+    "n0": {
+      "node_id": "n0",
+      "move": null,
+      "comment": "Root position (empty board for sample).",
+      "side_to_play_after": "B",
+      "tags": ["root"],
+      "children": [
+        { "node_id": "n1", "label": "Main line", "weight": 0.7 },
+        { "node_id": "n2", "label": "Alt", "weight": 0.3 }
+      ]
+    },
+    "n1": {
+      "node_id": "n1",
+      "move": "C3",
+      "comment": "Approach in the lower-left corner (9x9 sample).",
+      "side_to_play_after": "W",
+      "tags": ["mainline"],
+      "children": [{ "node_id": "n3", "label": "Reply", "weight": 1.0 }]
+    },
+    "n3": {
+      "node_id": "n3",
+      "move": "D3",
+      "comment": "Common reply.",
+      "side_to_play_after": "B",
+      "tags": ["mainline"],
+      "children": [{ "node_id": "n4", "label": "Extend", "weight": 1.0 }]
+    },
+    "n4": {
+      "node_id": "n4",
+      "move": "C4",
+      "comment": "Continue the local sequence.",
+      "side_to_play_after": "W",
+      "tags": ["mainline"],
+      "children": []
+    },
+    "n2": {
+      "node_id": "n2",
+      "move": "D4",
+      "comment": "Alternative first move.",
+      "side_to_play_after": "W",
+      "tags": ["alt"],
+      "children": []
+    }
+  }
+}
+

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/tsumego_puzzle_v2.schema.json",
+  "title": "Infinite AI Tsumego Miner - Puzzle Schema (v2)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["uuid", "timestamp", "puzzle_type", "board_size", "setup_moves", "color_to_play", "solution", "metadata"],
+  "properties": {
+    "uuid": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "generated_by": { "type": "string" },
+    "puzzle_type": { "type": "string" },
+    "board_size": { "type": "integer", "minimum": 1, "maximum": 25 },
+
+    "setup_moves": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          { "enum": ["B", "W"] },
+          { "type": "string", "minLength": 1 }
+        ],
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+
+    "color_to_play": { "enum": ["B", "W"] },
+
+    "blunder": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "move": { "type": "string" },
+        "winrate_before": { "type": "number", "minimum": 0, "maximum": 1 },
+        "winrate_after": { "type": "number", "minimum": 0, "maximum": 1 },
+        "delta": { "type": "number", "minimum": -1, "maximum": 1 }
+      }
+    },
+
+    "solution": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["correct_move"],
+      "properties": {
+        "correct_move": { "type": "string", "minLength": 1 },
+        "referee_winrate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "referee_visits": { "type": "integer", "minimum": 0 },
+        "policy_prior": { "type": "number", "minimum": 0, "maximum": 1 },
+        "difficulty_metrics": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "visits_to_solve": { "type": "integer", "minimum": 0 },
+            "policy_prior": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+
+    "analysis": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "policy_distribution": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "move": { "type": "string" },
+              "policy": { "type": "number", "minimum": 0, "maximum": 1 },
+              "winrate": { "type": "number", "minimum": 0, "maximum": 1 },
+              "visits": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "wrong_move_refutation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "response": { "type": "string" },
+              "winrate": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        }
+      }
+    },
+
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["position_hash"],
+      "properties": {
+        "ownership": {
+          "type": ["array", "null"],
+          "items": { "type": "number", "minimum": -1, "maximum": 1 }
+        },
+        "score_lead": { "type": ["number", "null"] },
+        "position_hash": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
+

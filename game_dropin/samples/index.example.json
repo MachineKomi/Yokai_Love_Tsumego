@@ -1,0 +1,29 @@
+{
+  "go_content_version": 1,
+  "tsumego": {
+    "puzzles_dir": "content/go/tsumego/puzzles",
+    "items": [
+      {
+        "uuid": "sample_0001",
+        "json": "puzzle_sample_0001.json",
+        "sgf": "puzzle_sample_0001.sgf",
+        "board_size": 9,
+        "puzzle_type": "life_and_death_blunder",
+        "tags": ["sample", "integration"]
+      }
+    ]
+  },
+  "joseki": {
+    "trees_dir": "content/go/joseki/trees",
+    "items": [
+      {
+        "id": "joseki_sample_0001",
+        "json": "joseki_sample_0001.json",
+        "sgf": "joseki_sample_0001.sgf",
+        "board_size": 9,
+        "tags": ["sample", "integration"]
+      }
+    ]
+  }
+}
+
